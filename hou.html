@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>心动告白界面💖</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background-color: #fef7fb;
+            font-family: "微软雅黑", sans-serif;
+            text-align: center;
+        }
+
+        .character {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 20px auto;
+            display: block;
+        }
+
+        .question {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 20px;
+            border: none;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+            button:hover {
+                transform: scale(1.05);
+            }
+
+        .yes {
+            background-color: #ff4d4f;
+        }
+
+        .no {
+            background-color: #69b1ff;
+        }
+
+        .play-btn {
+            background-color: #ff3333;
+            color: white;
+            margin: 20px auto;
+            display: block;
+        }
+
+        .tip {
+            color: red;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="tip">点击按钮播放音乐</div>
+
+    <img src="https://img.keaitupian.cn/newupload/02/1675324698835514.jpg" width="300px" />
+
+    <div class="question">我想和你成为好朋友，可以成为我的好朋友吗？</div>
+
+    <div class="button-group">
+        <button id="yesBtn" class="yes">我愿意❤️</button>
+        <button id="noBtn" class="no">不行</button>
+    </div>
+
+    <button id="playBtn" class="play-btn">🔊 播放《爱错》音乐</button>
+
+    <audio autoplay id="loveMusic" loop>
+        <source src="https://github.com/yh-yh-yh/yu-/raw/refs/heads/main/%E7%88%B1%E9%94%99.mp3" type="audio/mpeg">
+
+
+    </audio>
+    您的浏览器不支持音频播放
+    </think>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const playBtn = document.getElementById('playBtn');
+            const loveMusic = document.getElementById('loveMusic');
+            const yesBtn = document.getElementById('yesBtn');
+            const noBtn = document.getElementById('noBtn');
+            let noClickCount = 0;
+
+            playBtn.addEventListener('click', () => {
+                loveMusic.play().then(() => {
+                    console.log('音乐开始播放');
+                }).catch(err => {
+                    alert('音乐加载失败，请检查链接是否正确');
+                });
+            });
+
+            yesBtn.addEventListener('click', () => {
+                alert('💖 太好了！我们以后就是好朋友啦～');
+            });
+
+            noBtn.addEventListener('click', () => {
+                noClickCount++;
+                const scale = 1 - (noClickCount * 0.05);
+                noBtn.style.transform = `scale(${scale})`;
+
+                let alertMsg = '';
+                switch (noClickCount) {
+                    case 1:
+                        alertMsg = '🥺 再考虑考虑呀～';
+                        break;
+                    case 2:
+                        alertMsg = '😢 别这样嘛';
+                        break;
+                    case 3:
+                        alertMsg = '😣 我真的想和你当朋友，再想想吧~';
+                        break;
+                    case 4:
+                        alertMsg = '😞 好吧，如果你有一点点想，就告诉我~';
+                        break;
+                    case 5:
+                        noBtn.style.pointerEvents = 'none';
+                        noBtn.style.opacity = '0.5';
+                        alertMsg = '😔 好吧，如果你改变主意了，随时可以回来找我~';
+                        break;
+                }
+                // 只显示提示语，不添加关闭网页选项
+                alert(alertMsg);
+            });
+        });
+    </script>
+</body>
+</html>
